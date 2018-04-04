@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>主页</title>
     <link href="../css/index.css" rel="stylesheet" type="text/css"/>
+    <script src="../js/jquery/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="../js/index.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="top_nav">
     <ul>
         <li>看图</li>
-        <li>换图</li>
+        <li><a href="#换图" onclick="random()">换图</a></li>
     </ul>
 </div>
 <div id="img">
@@ -17,7 +19,7 @@
         <h1>图片名称</h1>
     </div>
     <div id="image_panel">
-        <img id="img_show" src="../images/connor-limbocker-575709-unsplash.jpg" width="800" height="450" >
+        <div id="img_show" ></div>
     </div>
 </div>
 

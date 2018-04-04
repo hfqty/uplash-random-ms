@@ -1,0 +1,29 @@
+#top_nav{
+    height: 30px;
+    width: 99% ;
+    margin: 0 auto;
+    background: #606060;
+    color: #cccccc;
+}
+#top_nav>ul{
+   list-style: none;
+
+}
+
+#top_nav>ul li{
+    float: left;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 80%;
+    font-family: "Microsoft JhengHei";
+}
+
+#image_panel{
+    margin: 30px auto;
+    padding: 10px;
+
+}
+#img_show{
+
+}

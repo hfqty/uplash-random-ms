@@ -11,17 +11,39 @@
 <div id="top_nav">
     <ul>
         <li>看图</li>
-        <li><a href="#换图" onclick="random()">换图</a></li>
+        <li onclick="random()">换图</li>
+        <li onclick="save()">保存</li>
     </ul>
 </div>
-<div id="img">
-    <div id="title_bar">
-        <h1>图片名称</h1>
+<div id="image_info">
+    <div id="img">
+        <div id="title_bar">
+            <h1>图片名称</h1>
+            <p id="image_url" hidden></p>
+        </div>
+        <div id="image_show">
+
+        <img id="image_panel">
+        </div>
     </div>
-    <div id="image_panel">
-        <div id="img_show" ></div>
+
+    <div id="all">
+        <table border="1" cellpadding="0" cellspacing="0" id="images">
+            <tr>
+                <td colspan="11"><h1>保存的图片</h1></td>
+            </tr>
+            <tr>
+                <th>id：</th>
+                <th style="width: 200px">地址：</th>
+                <th>创建时间：</th>
+            </tr>
+            <tr th:if="${images != null}" th:each="image: ${images}">
+                <td th:text="${image.id}"></td>
+                <td id="img_td_url" th:text="${image.url}"></td>
+                <td th:text="${#dates.format(image.create_time, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+        </table>
     </div>
 </div>
-
 </body>
 </html>

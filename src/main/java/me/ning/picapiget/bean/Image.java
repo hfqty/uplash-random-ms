@@ -1,6 +1,6 @@
 package me.ning.picapiget.bean;
 
-import me.ning.picapiget.util.ImageIdUtil;
+import me.ning.picapiget.util.ImageUtil;
 
 import java.util.Date;
 
@@ -19,7 +19,7 @@ public class Image {
     }
 
     public Image( String url, Date create_time, Date last_view) {
-        this.id = ImageIdUtil.getImageId(url);
+        this.id = ImageUtil.getImageId(url);
         this.url = url;
         this.create_time = create_time;
         this.last_view = last_view;

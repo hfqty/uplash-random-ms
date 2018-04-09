@@ -4,7 +4,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import me.ning.picapiget.bean.Image;
 import me.ning.picapiget.dao.ImageDao;
 import me.ning.picapiget.service.ImageService;
-import me.ning.picapiget.util.ImageIdUtil;
+import me.ning.picapiget.util.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +36,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Integer hadImage(String url) {
-        List<Image> images = imageDao.hadImage(ImageIdUtil.getImageId(url));
+        List<Image> images = imageDao.hadImage(ImageUtil.getImageId(url));
         if (images == null || images.isEmpty())
             return 0;
         return images.size();

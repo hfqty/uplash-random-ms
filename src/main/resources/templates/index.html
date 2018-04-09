@@ -10,9 +10,11 @@
 <body>
 <div id="top_nav">
     <ul>
-        <li>看图</li>
+        <li onclick="look()">看图</li>
         <li onclick="random()">换图</li>
         <li onclick="save()">保存</li>
+        <li onclick="download()">下载</li>
+        <li id="back_btn" onclick="back()" hidden>返回</li>
     </ul>
 </div>
 <div id="image_info">
@@ -39,7 +41,7 @@
             </tr>
             <tr th:if="${images != null}" th:each="image: ${images}">
                 <td th:text="${image.id}"></td>
-                <td id="img_td_url" th:text="${image.url}"></td>
+                <td class="img_td" th:text="${image.url}"  onclick="show(this);"></td>
                 <td th:text="${#dates.format(image.create_time, 'yyyy-MM-dd HH:mm:ss')}"></td>
             </tr>
         </table>

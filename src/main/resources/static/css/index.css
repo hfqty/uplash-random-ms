@@ -48,6 +48,11 @@
     width: 1366px;
     height: 768px;
 }
+#image_name{
+    font-size: 50%;
+    font-family: 'Segoe UI';
+    color: #7d7d7d;
+}
 #image_panel{
     width: 1366px;
     height: 768px;
@@ -57,6 +62,10 @@
     width:1366px;
     margin: 10px auto;
 }
+#table_title{
+    font-size: 60px;
+    font-family: "Leelawadee UI";
+}
 #images{
     width: 1366px;
     margin: 0 auto;
@@ -64,6 +73,7 @@
 .img_td{
     font-size: 50%;
 }
+
 
 
 

@@ -6,7 +6,7 @@ $(function () {
 
 function back() {
     var data = $("#image_url").text();
-    $("#title_bar h1").text(data.substring(28, 60));
+    $("#image_name").text(data);
     $("#image_panel").attr("src", data);
     $("#back_btn").hide();
 }
@@ -17,7 +17,7 @@ function look() {
 
 function show(td) {
     var data = td.innerText;
-    $("#title_bar h1").text(data.substring(28, 60));
+    $("#image_name").text(data);
     $("#image_panel").attr("src", data);
     $("#back_btn").show();
 }
@@ -31,7 +31,7 @@ function random() {
         type: "POST",
         success: function (data) {
             $("#image_url").text(data);
-            $("#title_bar h1").text(data.substring(28, 60));
+            $("#image_name").text(data);
             $("#image_panel").attr("src", data);
         },
         error: function () {

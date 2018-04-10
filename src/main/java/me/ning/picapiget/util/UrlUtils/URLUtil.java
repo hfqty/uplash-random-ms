@@ -4,7 +4,7 @@ import me.ning.picapiget.util.HttpUtils.RequestUtil;
 
 import java.net.HttpURLConnection;
 
-public class GetRequestUrl {
+public class URLUtil {
 
 
     public static String RedirectUrl(){

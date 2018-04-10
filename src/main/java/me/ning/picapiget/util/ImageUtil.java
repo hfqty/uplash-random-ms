@@ -50,4 +50,37 @@ public class ImageUtil {
         }
 
     }
+
+    public  static String getImageName(String url){
+        String imageId = ImageUtil.getImageId(url);
+        logger.info("图片名称："+imageId);
+        return  imageId+".jpg";
+    }
+
+    public static String getImageFullPath(String url){
+        String imageName = getImageId(url);
+        return "D:\\devf\\file server\\images\\"+imageName;
+    }
+
+    public static boolean checkAndDownload(HttpURLConnection connection,String fullPath){
+        logger.info("完整路径："+fullPath);
+        logger.info("开始检查文件是否存在");
+        File file = new File(fullPath);
+        if(file.exists()&&file.isFile()){
+            return true;
+        }
+        try {
+            file = FileUtil.checkExist(fullPath);
+            if(file == null ){
+                saveToServer(connection, fullPath);
+                file = new File(fullPath);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(file.exists()&&file.isFile()){
+            return true;
+        }
+        return false;
+    }
 }

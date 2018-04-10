@@ -1,0 +1,51 @@
+
+#image_info{
+    width: 100%;
+    height: 720px;
+
+}
+#image_show{
+    width: 100%;
+    height: 699px;
+    background-size: 80% 80%;
+}
+#menu_bar{
+    width: 1280px;
+    height: 30px;
+
+}
+#menu_bar>ul{
+    list-style: none;
+    margin: 0 auto;
+}
+#menu_bar>ul li{
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    float: left;
+    cursor: pointer;
+}
+
+
+
+a:hover{
+    color: #454545;
+}
+
+a:active{
+    color: #000;
+}
+
+a:link{
+    color:#000
+}
+a:visited{
+    color: #000;
+}
+
+a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}

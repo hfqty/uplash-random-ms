@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" crossorigin="anonymous" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" crossorigin="anonymous" href="../../css/bootstrap-grid.min.css"/>
+    <link rel="stylesheet" crossorigin="anonymous" href="../../css/bootstrap-table.min.css"/>
+    <link rel="stylesheet" crossorigin="anonymous" href="../../css/image_table.css"/>
+    <script src="../../js/jquery/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="../../js/index.js" type="text/javascript"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/bootstrap-table.min.js"></script>
+    <script src="../../js/image_table.js"></script>
+</head>
+<body>
+<div id="image_preview" hidden >
+    <img id="img_pre"/>
+</div>
+<div id="image_table">
+
+    <table
+            data-toggle="table"
+            data-url="image/all"
+            data-pagination = “true”
+    >
+        <thead>
+            <tr>
+                <th
+                 data-field="url"
+                 data-title="图片地址">
+                </th>
+                <th
+                    data-field="create_time"
+                    data-title="创建时间"
+                >
+
+                </th>
+            </tr>
+        </thead>
+
+    </table>
+</div>
+</body>
+</html>

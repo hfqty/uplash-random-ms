@@ -2,11 +2,13 @@ package me.ning.picapiget.dto;
 
 import java.io.Serializable;
 
-public class OutputDTO implements Serializable {
+public class OutputDTO<T> implements Serializable {
 
     private String code = "0";
 
     private String msg = "操作成功";
+
+    private T data;
 
     public OutputDTO() {
     }
@@ -30,5 +32,13 @@ public class OutputDTO implements Serializable {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }

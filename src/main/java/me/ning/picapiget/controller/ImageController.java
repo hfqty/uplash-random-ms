@@ -1,5 +1,7 @@
 package me.ning.picapiget.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import me.ning.picapiget.bean.Image;
 import me.ning.picapiget.dto.OutputDTO;
 import me.ning.picapiget.service.ImageService;
@@ -11,12 +13,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -35,8 +39,14 @@ public class ImageController {
     }
 
     @RequestMapping("/all")
-    public List<Image> all() {
-        return imageService.allImages();
+    public PageInfo<Image> all(@RequestParam(value = "pageNum", required = false, defaultValue="1") Integer pageNum,
+                               @RequestParam(value = "pageSize", required = false, defaultValue="10") Integer pageSize
+    ) {
+        //分页处理，显示第一页的10条数据
+        PageHelper.startPage(1, 10);
+        List<Image> images = imageService.allImages();
+        PageInfo<Image> pageInfo = new PageInfo<>(images);
+        return pageInfo;
     }
 
     @RequestMapping("/save")

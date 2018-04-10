@@ -14,7 +14,6 @@ public class HelloController {
     private ImageService imageService;
     @RequestMapping("**")
     public String index(Model model){
-        model.addAttribute("images",imageService.allImages());
         return "index";
     }
 }

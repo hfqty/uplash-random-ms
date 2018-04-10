@@ -12,17 +12,17 @@
 </head>
 <body>
 <div id="top_nav">
-
     <ul>
-        <li onclick="look()">看图</li>
-        <li onclick="random()">换图</li>
-        <li onclick="save()">保存</li>
-        <li onclick="download()">下载</li>
-        <li id="back_btn" onclick="back()" hidden>返回</li>
+        <li onclick="look()">just look</li>
+        <li onclick="random()">change random</li>
+        <li onclick="save()">save to server</li>
+        <li onclick="download()">download this</li>
+        <li id="back_btn" onclick="back()" hidden>back bak</li>
     </ul>
+
 </div>
-<h1  style="font-size: 100px;font-family: 'Leelawadee UI'">UNSPLASH PICTURE</h1>
-<hr>
+<div id="top_title">  <h1  style="font-size: 100px;font-family: 'Leelawadee UI'">Wallpaper FM</h1>
+</div>
 <div id="image_info">
     <div id="img">
         <div id="title_bar">
@@ -40,19 +40,20 @@
         <table border="1" cellpadding="0" cellspacing="0" id="images" class="table table-striped">
             <thead class="thead-dark">
             <tr>
-                <th>id：</th>
-                <th style="width: 200px">地址：</th>
-                <th>创建时间：</th>
+              <!--  <th>预览</th>
+                <th>ID</th>-->
+                <th style="width: 200px">地址</th>
+                <th>创建时间</th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:if="${images != null}" th:each="image: ${images}">
-                <td th:text="${image.id}"></td>
-                <td class="img_td" th:text="${image.url}"  onclick="show(this);"></td>
-                <td th:text="${#dates.format(image.create_time, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            </tr>
+            <tbody id="all_images">
+
             </tbody>
         </table>
+
+        <ul class="pagenn">
+            <li></li>
+        </ul>
     </div>
 </div>
 </body>

@@ -1,4 +1,4 @@
-#top_nav{
+#top_nav>ul{
     height: 30px;
     width: 99% ;
     margin: 0 auto;
@@ -28,7 +28,10 @@
     background: #767676;
     border-radius: 5px;
 }
-
+#top_title{
+    width: 1366px;
+    margin: 10px auto;
+}
 #image_info{
     width: 100%;
     height: auto;
@@ -60,7 +63,7 @@
 }
 #all{
     width:1366px;
-    margin: 10px auto;
+    margin: 100px auto;
 }
 #table_title{
     font-size: 60px;

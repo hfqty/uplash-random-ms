@@ -2,7 +2,7 @@
 #image_info{
     width: 100%;
     height: 720px;
-
+    margin: 40px 0;
 }
 #image_show{
     width: 100%;
@@ -15,15 +15,17 @@
 
 }
 #menu_bar>ul{
+    width: 600px;
     list-style: none;
     margin: 0 auto;
 }
 #menu_bar>ul li{
-    width: 200px;
+    width: 120px;
     height: 30px;
     text-align: center;
     float: left;
     cursor: pointer;
+    text-align: center;
 }
 
 

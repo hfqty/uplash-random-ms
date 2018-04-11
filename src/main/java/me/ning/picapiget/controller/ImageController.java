@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Date;
-import java.util.List;
 
 
 @RequestMapping("/image")
@@ -38,13 +37,18 @@ public class ImageController {
     }
 
     @RequestMapping("/all")
-    public List<Image> all(@RequestParam(value = "pageNum", required = false, defaultValue="1") Integer pageNum,
-                           @RequestParam(value = "pageSize", required = false, defaultValue="10") Integer pageSize
+    public me.ning.picapiget.vo.Page all(@RequestParam(value = "pageNum", required = false, defaultValue="1") Integer pageNum,
+                                         @RequestParam(value = "pageSize", required = false, defaultValue="10") Integer pageSize
     ) {
         //分页处理，显示第一页的10条数据
          PageHelper.startPage(pageNum, pageSize);
-        List<Image> images = imageService.allImages();
-        return images;
+        Page<Image> images = (Page<Image>) imageService.allImages();
+        me.ning.picapiget.vo.Page page = new me.ning.picapiget.vo.Page(images.getResult());
+        page.setTotal((int) images.getTotal());
+        page.setPageNum(pageNum);
+        page.setPageSize(pageSize);
+        page.setPages(me.ning.picapiget.vo.Page.pages(pageSize,page.getTotal()));
+        return page;
     }
 
     @RequestMapping("/save")

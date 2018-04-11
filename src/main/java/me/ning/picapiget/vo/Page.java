@@ -11,6 +11,8 @@ public class Page<T> {
 
     private int total;
 
+    private int pages;
+
     private List<T> row;
 
 
@@ -53,13 +55,30 @@ public class Page<T> {
         this.row = row;
     }
 
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+
     @Override
     public String toString() {
         return "Page{" +
                 "pageSize=" + pageSize +
                 ", pageNum=" + pageNum +
                 ", total=" + total +
+                ", pages=" + pages +
                 ", row=" + row +
                 '}';
     }
+
+    public static int pages(int pageSize,int total){
+        if(pageSize<=0){
+            return 0;
+        }
+        return total%pageSize>0?total/pageSize+1:total/pageSize;
+    }
+
 }

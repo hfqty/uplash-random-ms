@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" crossorigin="anonymous" href="../../css/bootstrap.min.css"/>
@@ -7,38 +7,26 @@
     <link rel="stylesheet" crossorigin="anonymous" href="../../css/bootstrap-table.min.css"/>
     <link rel="stylesheet" crossorigin="anonymous" href="../../css/image_table.css"/>
     <script src="../../js/jquery/jquery-3.3.1.js" type="text/javascript"></script>
-    <script src="../../js/index.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap.min.js"></script>
-    <script src="../../js/bootstrap-table.min.js"></script>
     <script src="../../js/image_table.js"></script>
 </head>
 <body>
-<div id="image_preview" hidden >
-    <img id="img_pre"/>
+<div id="nav_bar">
+    <ul>
+        <li>总页数：<span id="pages"></span></li>
+        <li>总数：<span id="total"></span></li>
+        <li>当前位置：<span id="pageNum"></span></li>
+        <li>此页个数:<span id="pageSize"></span></li>
+        <li id="pre_page" onclick="pre_page()">上一页</li>
+        <li id="next_page" onclick="next_page()">下一页</li>
+        <li ><input id="in_pageSize" type="text" placeholder="个数"/> </li>
+        <li ><input id="in_pageNum" type="text" placeholder="页数"/> </li>
+    </ul>
 </div>
-<div id="image_table">
-
-    <table
-            data-toggle="table"
-            data-url="image/all"
-            data-pagination = “true”
-    >
-        <thead>
-            <tr>
-                <th
-                 data-field="url"
-                 data-title="图片地址">
-                </th>
-                <th
-                    data-field="create_time"
-                    data-title="创建时间"
-                >
-
-                </th>
-            </tr>
-        </thead>
-
-    </table>
+<div id="images_view">
+    <ul id="images_ul">
+    </ul>
 </div>
+
+
 </body>
 </html>

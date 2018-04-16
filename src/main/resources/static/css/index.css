@@ -63,4 +63,8 @@ a{
     text-decoration: none;
 }
 
-
+#msg{
+    font-family: "Microsoft JhengHei";
+    font-size: 50px;
+    margin: 0 30px;
+}

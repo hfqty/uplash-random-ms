@@ -48,7 +48,11 @@ function save() {
         dataType: "json",
         type: "POST",
         success: function (data) {
-            alert(data.msg);
+            $("#msg").text(data.msg);
+            $("#msg").show();
+            setTimeout(function () {
+               $("#msg").hide();
+            },1000);
             all_images(1,9);
         },
         error: function () {

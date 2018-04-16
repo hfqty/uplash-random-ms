@@ -1,7 +1,6 @@
 $(function(){
 all_images(1,9);
 
-
 })
 
 function all_images(num,size){
@@ -73,6 +72,7 @@ function getBigUrl(url,w,h){
     return a+w+b+h+c;
 }
 function lgimg(img){
+    $("#back_pre_btn").show();
     var smallurl = img.src;
     var largeurl = getBigUrl(smallurl,1920,1080);
     show_table_image(largeurl);
@@ -82,7 +82,6 @@ function lgimg(img){
 function show_table_image(image_url){
     $("#image_show").attr("src",image_url);
     $("#table_image_url").text(image_url);
-    $("#back_pre_btn").show();
 }
 
 function download_table_image(){

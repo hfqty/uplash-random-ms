@@ -2,6 +2,7 @@ package me.ning.picapiget.dao;
 
 
 import me.ning.picapiget.bean.Image;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -20,6 +21,12 @@ public interface ImageDao{
 
     @Select("select * from images where id = #{id}")
     List<Image> hadImage(String id);
+
+    @Delete("delete from images where id  = #{id}")
+    void deleteImageById(String id);
+
+
+
 
 
 }

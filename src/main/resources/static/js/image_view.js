@@ -1,9 +1,10 @@
+var previewUrl = "";
 $(function(){
    random_image();
 })
 
 function random_image(){
-    var url = "http://localhost:8080/image/url";
+    var url = "/image/url";
     $.ajax({
         url: url,
         data: {},
@@ -26,6 +27,7 @@ function nowUrl(){
 
 
 function download() {
+
     var imgurl = nowUrl();
     if (imgurl == "" || imgurl == null || imgurl == undefined) {
         alert("正在加载，请稍等");
@@ -53,4 +55,5 @@ function save() {
 
     });
 }
+
 

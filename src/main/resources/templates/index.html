@@ -4,28 +4,47 @@
     <meta charset="UTF-8">
     <title>主页</title>
     <link href="../css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/image_table.css"rel="stylesheet" type="text/css"/>
     <script src="../js/jquery/jquery-3.3.1.js" type="text/javascript"></script>
     <script src="../js/index.js" type="text/javascript"></script>
-    <script src="../js/image_view.js"></script>
+    <script src="../js/image_table.js" ></script>
 </head>
 <body>
+
+<div id="image_info">
+    <img id="image_show"/>
+    <p id="image_url" hidden></p>
+    <p id="table_image_url" hidden></p>
+</div>
 <div id="top_nav">
     <ul>
         <li ><a href="/home">主页</a></li>
-        <li ><a href="/home">换图</a></li>
-        <li ><a href="/image_table" target="frame">已保存</a></li>
+        <li ><a href="javascript:;" onclick="random_image();">换图</a></li>
+        <li ><a href="javascript:;" onclick="save();" >存图</a></li>
+        <li onclick="download();"><a href="javascript:;" >下图</a></li>
+        <li  ><a href="#nav_bar">有图</a></li>
+        <li><a href="javascript:;" onclick="download_table_image()">此图</a></li>
+        <li hidden id="back_pre_btn" onclick="back_pre_img()">上图</li>
+
     </ul>
 </div>
-<img id="image_show"/>
 
-<div id="image_info">
-<p id="image_url" hidden></p>
+<div  id="nav_bar" hidden>
+    <ul>
+        <li>总页数：<span id="pages"></span></li>
+        <li>总数：<span id="total"></span></li>
+        <li>当前位置：<span id="pageNum"></span></li>
+        <li>此页个数:<span id="pageSize"></span></li>
+        <li id="pre_page" onclick="pre_page()">上一页</li>
+        <li id="next_page" onclick="next_page()">下一页</li>
+        <li ><input id="in_pageSize" type="text" placeholder="个数"/> </li>
+        <li ><input id="in_pageNum" type="text" placeholder="页数"/> </li>
+        <li onclick="find_page()"> <a >查询</a></li>
+    </ul>
 </div>
-
-
-<div id="content">
-    <iframe name="frame"   height="100%" src="/image_table"></iframe>
+<div id="images_view">
+    <ul id="images_ul">
+    </ul>
 </div>
-
 </body>
 </html>

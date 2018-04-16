@@ -12,7 +12,7 @@ import java.util.List;
 public interface ImageDao{
 
 
-    @Select("select * from images")
+    @Select("select * from images order by create_time desc")
     List<Image> allImages();
 
     @Insert("insert into images values(#{img.id},#{img.url},#{img.path},#{img.create_time},#{img.last_view})")

@@ -5,31 +5,37 @@ import me.ning.picapiget.util.ImageUtil;
 import java.util.Date;
 
 public class Image {
-    private String id;
+    private Integer id;
+
+    private String name;
 
     private String url;
 
-    private String path;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     private Date create_time;
-
-    private Date last_view;
 
     public Image() {
     }
 
-    public Image( String url, Date create_time, Date last_view) {
-        this.id = ImageUtil.getImageId(url);
+    public Image( String url, Date create_time) {
+        this.name = ImageUtil.getImageId(url);
         this.url = url;
         this.create_time = create_time;
-        this.last_view = last_view;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,13 +47,7 @@ public class Image {
         this.url = url;
     }
 
-    public String getPath() {
-        return path;
-    }
 
-    public void setPath(String path) {
-        this.path = path;
-    }
 
     public Date getCreate_time() {
         return create_time;
@@ -56,23 +56,15 @@ public class Image {
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
     }
-
-    public Date getLast_view() {
-        return last_view;
-    }
-
-    public void setLast_view(Date last_view) {
-        this.last_view = last_view;
-    }
-
     @Override
     public String toString() {
         return "Image{" +
-                "id=" + id +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
-                ", path='" + path + '\'' +
                 ", create_time=" + create_time +
-                ", last_view=" + last_view +
                 '}';
     }
+
+
 }

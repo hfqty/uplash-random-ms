@@ -1,4 +1,4 @@
-package me.ning.picapiget.util.HttpUtils;
+package me.ning.picapiget.util.http;
 
 import javax.servlet.http.HttpServletResponse;
 

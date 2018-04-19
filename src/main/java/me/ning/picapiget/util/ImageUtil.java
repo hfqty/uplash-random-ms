@@ -2,6 +2,7 @@ package me.ning.picapiget.util;
 
 import me.ning.picapiget.bean.Image;
 import me.ning.picapiget.util.file.FileUtil;
+import me.ning.picapiget.util.http.RequestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,20 +59,24 @@ public class ImageUtil {
     }
 
     public static String getImageFullPath(String url){
-        String imageName = getImageId(url);
-        return "D:\\devf\\file server\\images\\"+imageName;
+        String imageName = getImageName(url);
+        return "D:\\UnplashWallpaper\\"+imageName;
     }
 
-    public static boolean checkAndDownload(HttpURLConnection connection,String fullPath){
+    public static boolean checkAndDownload(String url){
+        HttpURLConnection connection  = RequestUtil.connection(url);
+        String fullPath = getImageFullPath(url);
         logger.info("完整路径："+fullPath);
-        logger.info("开始检查文件是否存在");
+        logger.info("检查本地：开始检查文件是否存在");
         File file = new File(fullPath);
         if(file.exists()&&file.isFile()){
+            logger.info("检查文件：已存在");
             return true;
         }
         try {
             file = FileUtil.checkExist(fullPath);
             if(file == null ){
+                logger.info("检查文件：文件不存在，开始下载。");
                 saveToServer(connection, fullPath);
                 file = new File(fullPath);
             }

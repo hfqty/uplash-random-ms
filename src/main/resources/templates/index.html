@@ -18,7 +18,7 @@
 </div>
 <div id="top_nav">
     <ul>
-        <li ><a href="/home">主页</a></li>
+        <li hidden><a href="/home">主页</a></li>
         <li ><a href="javascript:;" onclick="random_image();">换图</a></li>
         <li ><a href="javascript:;" onclick="save();" >存图</a></li>
         <li onclick="download();"><a href="javascript:;" >下图</a></li>
@@ -30,17 +30,25 @@
 </div>
 
 <div  id="nav_bar" hidden>
-    <ul>
+    <ul style="width: 100%">
         <li>总页数：<span id="pages"></span></li>
         <li>总数：<span id="total"></span></li>
         <li>当前位置：<span id="pageNum"></span></li>
         <li>此页个数:<span id="pageSize"></span></li>
+    </ul>
+    <div style="width: 100%;height: 1%">
+
+    </div>
+    <ul>
         <li id="pre_page" onclick="pre_page()">上一页</li>
         <li id="next_page" onclick="next_page()">下一页</li>
         <li ><input id="in_pageSize" type="text" placeholder="个数"/> </li>
         <li ><input id="in_pageNum" type="text" placeholder="页数"/> </li>
-        <li onclick="find_page()"> <a >查询</a></li>
+        <li onclick="find_page()"> <a >查询</a></li><br>
     </ul>
+</div>
+<div style="width: 100%;height: 10px">
+
 </div>
 <div id="images_view">
     <ul id="images_ul">

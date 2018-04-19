@@ -15,12 +15,12 @@ public interface ImageDao{
     @Select("select * from images order by create_time desc")
     List<Image> allImages();
 
-    @Insert("insert into images values(#{img.id},#{img.url},#{img.path},#{img.create_time},#{img.last_view})")
+    @Insert("insert into images(name,url,create_time) values(#{img.name},#{img.url},#{img.create_time})")
     Integer addImage(@Param("img") Image img);
 
 
-    @Select("select * from images where id = #{id}")
-    List<Image> hadImage(String id);
+    @Select("select * from images where name = #{name}")
+    List<Image> hadImage(String name);
 
     @Delete("delete from images where id  = #{id}")
     void deleteImageById(String id);

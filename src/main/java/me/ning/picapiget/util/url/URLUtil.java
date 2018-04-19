@@ -1,6 +1,6 @@
-package me.ning.picapiget.util.UrlUtils;
+package me.ning.picapiget.util.url;
 
-import me.ning.picapiget.util.HttpUtils.RequestUtil;
+import me.ning.picapiget.util.http.RequestUtil;
 
 import java.net.HttpURLConnection;
 

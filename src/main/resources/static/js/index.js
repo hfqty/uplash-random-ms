@@ -42,21 +42,23 @@ function download() {
  */
 
 function save() {
+
     $.ajax({
         url: "image/save",
         data: {url: nowUrl()},
         dataType: "json",
         type: "POST",
         success: function (data) {
-            $("#msg").text(data.msg);
+            $("#msg").text("正在下载，请稍等");
             $("#msg").show();
+            $("#msg").text(data.msg);
             setTimeout(function () {
                $("#msg").hide();
             },1000);
             all_images(1,9);
         },
         error: function () {
-            alert("保存失败，请重试");
+            $("#msg").text("保存出错");
         }
 
     });

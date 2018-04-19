@@ -1,4 +1,4 @@
-package me.ning.picapiget.util.HttpUtils;
+package me.ning.picapiget.util.http;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

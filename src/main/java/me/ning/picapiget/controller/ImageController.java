@@ -5,10 +5,10 @@ import com.github.pagehelper.PageHelper;
 import me.ning.picapiget.bean.Image;
 import me.ning.picapiget.dto.OutputDTO;
 import me.ning.picapiget.service.ImageService;
-import me.ning.picapiget.util.HttpUtils.RequestUtil;
-import me.ning.picapiget.util.HttpUtils.ResponseUtil;
+import me.ning.picapiget.util.http.RequestUtil;
+import me.ning.picapiget.util.http.ResponseUtil;
 import me.ning.picapiget.util.ImageUtil;
-import me.ning.picapiget.util.UrlUtils.URLUtil;
+import me.ning.picapiget.util.url.URLUtil;
 import me.ning.picapiget.util.file.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,11 +56,12 @@ public class ImageController {
         OutputDTO outputDTO = new OutputDTO();
         boolean result = false;
         try {
+            ImageUtil.checkAndDownload(url);
             boolean had = imageService.hadImage(url) > 0;
             if (had) {
                 outputDTO.setMsg("已存在");
             }else {
-                result = imageService.addImage(new Image(url, new Date(), new Date()));
+                result = imageService.addImage(new Image(url, new Date()));
             }
         } catch (Exception e) {
             outputDTO.setMsg("已经有了");
@@ -88,20 +89,16 @@ public class ImageController {
     @RequestMapping("/checkAndDownload")
     public OutputDTO valiExitsFile(String url){
         OutputDTO outputDTO = new OutputDTO();
-        String fullPath = ImageUtil.getImageFullPath(url);
-       boolean result =  ImageUtil.checkAndDownload( RequestUtil.connection(url),fullPath);
-       if(result){
-           return outputDTO;
+       if(!ImageUtil.checkAndDownload(url)){
+           outputDTO.setMsg("文件不存在，无法下载");
+           outputDTO.setCode("-1");
        }
-       outputDTO.setMsg("文件不存在，无法下载");
-       outputDTO.setCode("-1");
        return outputDTO;
     }
 
     @RequestMapping("/download")
     public void download(HttpServletResponse response, String url) {
-        String fullPath = ImageUtil.getImageFullPath(url);
-        ImageUtil.checkAndDownload( RequestUtil.connection(url),fullPath);
+        ImageUtil.checkAndDownload(url);
         String fileName = ImageUtil.getImageName(url);
         File file = new File(ImageUtil.getImageFullPath(url));
         if (file.exists()) {
@@ -109,7 +106,5 @@ public class ImageController {
             FileUtil.downloadFile(response, file);
         }
     }
-
-
 
 }

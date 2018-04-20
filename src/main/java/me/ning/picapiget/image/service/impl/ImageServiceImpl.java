@@ -1,10 +1,10 @@
-package me.ning.picapiget.service.impl;
+package me.ning.picapiget.image.service.impl;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-import me.ning.picapiget.bean.Image;
-import me.ning.picapiget.dao.ImageDao;
-import me.ning.picapiget.service.ImageService;
-import me.ning.picapiget.util.ImageUtil;
+import me.ning.picapiget.image.bean.Image;
+import me.ning.picapiget.image.dao.ImageDao;
+import me.ning.picapiget.image.service.ImageService;
+import me.ning.picapiget.image.util.img.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 public class ImageServiceImpl implements ImageService {
+
 
     @Autowired
     private ImageDao imageDao;
@@ -23,13 +24,10 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public boolean addImage(Image image) throws MySQLIntegrityConstraintViolationException {
-        System.out.println("保存图片:保存中-------------");
         Integer result = imageDao.addImage(image);
         if (result > 0) {
-            System.out.println("保存图片:保存成功-------------");
             return true;
         } else {
-            System.out.println("保存图片:保存失败-------------");
             return false;
         }
     }

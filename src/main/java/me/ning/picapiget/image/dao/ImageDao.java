@@ -1,7 +1,7 @@
-package me.ning.picapiget.dao;
+package me.ning.picapiget.image.dao;
 
 
-import me.ning.picapiget.bean.Image;
+import me.ning.picapiget.image.bean.Image;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;

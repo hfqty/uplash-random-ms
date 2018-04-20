@@ -1,4 +1,4 @@
-package me.ning.picapiget.vo;
+package me.ning.picapiget.image.vo;
 
 
 import java.util.List;

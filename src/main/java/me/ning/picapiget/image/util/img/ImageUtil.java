@@ -1,8 +1,7 @@
-package me.ning.picapiget.util;
+package me.ning.picapiget.image.util.img;
 
-import me.ning.picapiget.bean.Image;
-import me.ning.picapiget.util.file.FileUtil;
-import me.ning.picapiget.util.http.RequestUtil;
+import me.ning.picapiget.image.util.file.FileUtil;
+import me.ning.picapiget.image.util.http.RequestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,6 +75,8 @@ public class ImageUtil {
         try {
             file = FileUtil.checkExist(fullPath);
             if(file == null ){
+
+
                 logger.info("检查文件：文件不存在，开始下载。");
                 saveToServer(connection, fullPath);
                 file = new File(fullPath);

@@ -1,4 +1,4 @@
-package me.ning.picapiget.dto;
+package me.ning.picapiget.image.dto;
 
 import java.io.Serializable;
 

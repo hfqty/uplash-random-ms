@@ -1,4 +1,4 @@
-package me.ning.picapiget.util.file;
+package me.ning.picapiget.image.util.file;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;

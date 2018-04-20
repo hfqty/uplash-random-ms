@@ -1,8 +1,7 @@
-package me.ning.picapiget.service;
+package me.ning.picapiget.image.service;
 
-import com.github.pagehelper.Page;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-import me.ning.picapiget.bean.Image;
+import me.ning.picapiget.image.bean.Image;
 
 import java.util.List;
 

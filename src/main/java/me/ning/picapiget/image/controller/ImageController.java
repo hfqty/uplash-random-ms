@@ -1,15 +1,14 @@
-package me.ning.picapiget.controller;
+package me.ning.picapiget.image.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import me.ning.picapiget.bean.Image;
-import me.ning.picapiget.dto.OutputDTO;
-import me.ning.picapiget.service.ImageService;
-import me.ning.picapiget.util.http.RequestUtil;
-import me.ning.picapiget.util.http.ResponseUtil;
-import me.ning.picapiget.util.ImageUtil;
-import me.ning.picapiget.util.url.URLUtil;
-import me.ning.picapiget.util.file.FileUtil;
+import me.ning.picapiget.image.bean.Image;
+import me.ning.picapiget.image.dto.OutputDTO;
+import me.ning.picapiget.image.service.ImageService;
+import me.ning.picapiget.image.util.http.ResponseUtil;
+import me.ning.picapiget.image.util.img.ImageUtil;
+import me.ning.picapiget.image.util.url.URLUtil;
+import me.ning.picapiget.image.util.file.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,17 +36,17 @@ public class ImageController {
     }
 
     @RequestMapping("/all")
-    public me.ning.picapiget.vo.Page all(@RequestParam(value = "pageNum", required = false, defaultValue="1") Integer pageNum,
-                                         @RequestParam(value = "pageSize", required = false, defaultValue="10") Integer pageSize
+    public me.ning.picapiget.image.vo.Page all(@RequestParam(value = "pageNum", required = false, defaultValue="1") Integer pageNum,
+                                               @RequestParam(value = "pageSize", required = false, defaultValue="10") Integer pageSize
     ) {
         //分页处理，显示第一页的10条数据
          PageHelper.startPage(pageNum, pageSize);
         Page<Image> images = (Page<Image>) imageService.allImages();
-        me.ning.picapiget.vo.Page page = new me.ning.picapiget.vo.Page(images.getResult());
+        me.ning.picapiget.image.vo.Page page = new me.ning.picapiget.image.vo.Page(images.getResult());
         page.setTotal((int) images.getTotal());
         page.setPageNum(pageNum);
         page.setPageSize(pageSize);
-        page.setPages(me.ning.picapiget.vo.Page.pages(pageSize,page.getTotal()));
+        page.setPages(me.ning.picapiget.image.vo.Page.pages(pageSize,page.getTotal()));
         return page;
     }
 
@@ -61,7 +60,9 @@ public class ImageController {
             if (had) {
                 outputDTO.setMsg("已存在");
             }else {
+                logger.info("保存图片：保存到数据库");
                 result = imageService.addImage(new Image(url, new Date()));
+                logger.info("保存图片：成功保存");
             }
         } catch (Exception e) {
             outputDTO.setMsg("已经有了");

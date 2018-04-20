@@ -42,28 +42,40 @@ function download() {
  */
 
 function save() {
-
+    var imageUrl = nowUrl();
+    $("#msg").show();
+    if(imageUrl) {
+        $("#msg").text("正在下载，请稍等");
+    }else{
+        $("#msg").text("图片正在加载");
+        setTimeout(function () {
+            $("#msg").hide();
+        },1000);
+    }
     $.ajax({
         url: "image/save",
         data: {url: nowUrl()},
         dataType: "json",
         type: "POST",
         success: function (data) {
-            $("#msg").text("正在下载，请稍等");
-            $("#msg").show();
             $("#msg").text(data.msg);
             setTimeout(function () {
-               $("#msg").hide();
+                $("#msg").hide();
             },1000);
             all_images(1,9);
         },
         error: function () {
             $("#msg").text("保存出错");
+            setTimeout(function () {
+                $("#msg").hide();
+            },1000);
         }
 
     });
 }
+function showMsg(msg){
 
+}
 function back_pre_img(){
     $("#image_show").attr("src",$("#image_url").text());
 }

@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("me.ning.picapiget.dao")
+@MapperScan("me.ning.picapiget.image.dao")
 public class Application {
 
     public static void main(String[] args) {

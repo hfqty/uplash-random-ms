@@ -1,6 +1,6 @@
-package me.ning.picapiget.bean;
+package me.ning.picapiget.image.bean;
 
-import me.ning.picapiget.util.ImageUtil;
+import me.ning.picapiget.image.util.img.ImageUtil;
 
 import java.util.Date;
 

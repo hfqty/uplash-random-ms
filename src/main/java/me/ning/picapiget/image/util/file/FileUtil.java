@@ -28,6 +28,9 @@ public class FileUtil {
     }
 
     public static File createFile(String filePath) throws IOException {
+        if(filePath.contains("?")){
+            filePath.replace("?","0");
+        }
         File file=new File(filePath);
         file.createNewFile();
 

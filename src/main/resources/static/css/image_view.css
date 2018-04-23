@@ -5,44 +5,5 @@
 #image_show{
     width: 100%;
 }
-#menu_bar{
-    width: 1280px;
-    height: 30px;
-}
-#menu_bar>ul{
-    width: 600px;
-    list-style: none;
-    margin: 0 auto;
-}
-#menu_bar>ul li{
-    width: 120px;
-    height: 30px;
-    text-align: center;
-    float: left;
-    cursor: pointer;
-    text-align: center;
-}
 
 
-
-a:hover{
-    color: #454545;
-}
-
-a:active{
-    color: #000;
-}
-
-a:link{
-    color:#000
-}
-a:visited{
-    color: #000;
-}
-
-a{
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-}

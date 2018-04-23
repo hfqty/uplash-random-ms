@@ -38,6 +38,7 @@ public class ImageUtil {
             // 完毕，关闭所有链接
         } catch (IOException e) {
             e.printStackTrace();
+
         }
         logger.info("保存图片：保存到服务器成功");
     }
@@ -54,6 +55,7 @@ public class ImageUtil {
     public  static String getImageName(String url){
         String imageId = ImageUtil.getImageId(url);
         logger.info("图片名称："+imageId);
+
         return  imageId+".jpg";
     }
 
@@ -75,8 +77,6 @@ public class ImageUtil {
         try {
             file = FileUtil.checkExist(fullPath);
             if(file == null ){
-
-
                 logger.info("检查文件：文件不存在，开始下载。");
                 saveToServer(connection, fullPath);
                 file = new File(fullPath);

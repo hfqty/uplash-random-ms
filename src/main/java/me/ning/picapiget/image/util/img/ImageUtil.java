@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 
 public class ImageUtil {
@@ -20,25 +21,41 @@ public class ImageUtil {
         return String.valueOf(url.substring(START_INDEX,END_INDEX));
     }
 
-    public static void saveToServer(HttpURLConnection connection, String imageName) {
+    public static void saveToServer(HttpURLConnection connection, String fullPath) throws IOException {
         logger.info("保存图片：保存到服务器");
         // 输入流
+        InputStream is = null;
+        OutputStream os = null;
         try {
-            InputStream is = connection.getInputStream();
             // 1K的数据缓冲
-            byte[] bs = new byte[1024];
+            byte[] bs = new byte[4096];
+          is = connection.getInputStream();
+          os = new FileOutputStream(FileUtil.createFile(fullPath));
+            //总大小
+            int contentLength = connection.getContentLength();
+
+            BigDecimal writed = BigDecimal.ZERO;
+            BigDecimal fileSize = BigDecimal.valueOf(contentLength);
+            BigDecimal downloaded = BigDecimal.ZERO;
             // 读取到的数据长度
             int len;
             // 输出的文件流
-            OutputStream os = new FileOutputStream(FileUtil.createFile(imageName));
             // 开始读取
             while ((len = is.read(bs)) != -1) {
+                downloaded = BigDecimal.valueOf(len);
+                writed = writed.add(downloaded);
+                downloaded = writed.divide(fileSize,10,BigDecimal.ROUND_HALF_UP);
+                logger.info("下载进度："+downloaded+",("+writed+"/"+fileSize+")");
                 os.write(bs, 0, len);
             }
             // 完毕，关闭所有链接
         } catch (IOException e) {
             e.printStackTrace();
-
+        }finally {
+            if(is != null)
+            is.close();
+            if(os != null)
+            os.close();
         }
         logger.info("保存图片：保存到服务器成功");
     }
@@ -55,7 +72,6 @@ public class ImageUtil {
     public  static String getImageName(String url){
         String imageId = ImageUtil.getImageId(url);
         logger.info("图片名称："+imageId);
-
         return  imageId+".jpg";
     }
 
@@ -75,8 +91,7 @@ public class ImageUtil {
             return true;
         }
         try {
-            file = FileUtil.checkExist(fullPath);
-            if(file == null ){
+            if(FileUtil.checkExist(fullPath) == null ){
                 logger.info("检查文件：文件不存在，开始下载。");
                 saveToServer(connection, fullPath);
                 file = new File(fullPath);

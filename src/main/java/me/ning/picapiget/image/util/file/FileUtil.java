@@ -1,9 +1,15 @@
 package me.ning.picapiget.image.util.file;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.math.BigDecimal;
 
 public class FileUtil {
+
+    private static  final Logger logger = LoggerFactory.getLogger(FileUtil.class);
 
     /**
 
@@ -43,14 +49,21 @@ public class FileUtil {
         FileInputStream fis = null;
         BufferedInputStream bis = null;
         try {
+            long fileLength = file.length();
+
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis);
             OutputStream os = response.getOutputStream();
-            int i = bis.read(buffer);
-
-            while (i != -1) {
-                os.write(buffer, 0, i);
-                i = bis.read(buffer);
+            int len;
+            BigDecimal writed = BigDecimal.ZERO;
+            BigDecimal fileSize = BigDecimal.valueOf(fileLength);
+            BigDecimal downloaded = BigDecimal.ZERO;
+            while ((len = bis.read(buffer)) != -1) {
+                downloaded = BigDecimal.valueOf(len);
+                writed = writed.add(downloaded);
+                downloaded = writed.divide(fileSize,10,BigDecimal.ROUND_HALF_UP);
+                logger.info("下载进度："+downloaded+",("+writed+"/"+fileSize+")");
+                os.write(buffer, 0, len);
             }
         } catch (Exception e) {
             e.printStackTrace();

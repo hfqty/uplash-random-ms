@@ -2,6 +2,14 @@ var previewUrl = "";
 
 $(function(){
     random_image();
+
+    $("#auto_random").click(function () {
+        if($("#auto_random").text()=="是"){
+            $("#auto_random").text("否");
+        }else{
+            $("#auto_random").text("是");
+        }
+    });
 })
 
 
@@ -63,6 +71,12 @@ function save() {
                 $("#msg").hide();
             },1000);
             all_images(1,9);
+
+            //自动换图
+            var auto = getConfig();
+            if(auto != null && auto != '' && auto == "是"){
+                random_image();
+            }
         },
         error: function () {
             $("#msg").text("保存出错");
@@ -78,4 +92,9 @@ function showMsg(msg){
 }
 function back_pre_img(){
     $("#image_show").attr("src",$("#image_url").text());
+    $("#back_pre_btn").hide();
+}
+
+function getConfig() {
+    return $("#auto_random").text();
 }

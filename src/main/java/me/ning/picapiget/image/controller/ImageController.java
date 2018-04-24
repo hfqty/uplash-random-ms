@@ -53,7 +53,6 @@ public class ImageController {
     @RequestMapping("/save")
     public OutputDTO add(String url) {
         OutputDTO outputDTO = new OutputDTO();
-        boolean result = false;
         try {
             ImageUtil.checkAndDownload(url);
             boolean had = imageService.hadImage(url) > 0;
@@ -61,14 +60,12 @@ public class ImageController {
                 outputDTO.setMsg("已存在");
             }else {
                 logger.info("保存图片：保存到数据库");
-                result = imageService.addImage(new Image(url, new Date()));
+                imageService.addImage(new Image(url, new Date()));
+                outputDTO.setMsg("保存成功");
                 logger.info("保存图片：成功保存");
             }
         } catch (Exception e) {
             outputDTO.setMsg("已经有了");
-        }
-        if (result) {
-            outputDTO.setMsg("保存成功");
         }
         return outputDTO;
     }
@@ -100,10 +97,10 @@ public class ImageController {
     @RequestMapping("/download")
     public void download(HttpServletResponse response, String url) {
         ImageUtil.checkAndDownload(url);
-        String fileName = ImageUtil.getImageName(url);
-        File file = new File(ImageUtil.getImageFullPath(url));
-        if (file.exists()) {
-            ResponseUtil.responseHeader(response,fileName);
+        File file = new File(
+                ImageUtil.fullPath(url));
+        if (FileUtil.checkExist(file)) {
+            ResponseUtil.responseHeader(response,ImageUtil.name(url));
             FileUtil.downloadFile(response, file);
         }
     }

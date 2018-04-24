@@ -34,7 +34,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Integer hadImage(String url) {
-        List<Image> images = imageDao.hadImage(ImageUtil.getImageId(url));
+        List<Image> images = imageDao.hadImage(ImageUtil.Id(url));
         if (images == null || images.isEmpty())
             return 0;
         return images.size();

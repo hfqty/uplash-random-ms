@@ -26,7 +26,7 @@ public class Image {
     }
 
     public Image( String url, Date create_time) {
-        this.name = ImageUtil.getImageId(url);
+        this.name = ImageUtil.Id(url);
         this.url = url;
         this.create_time = create_time;
     }

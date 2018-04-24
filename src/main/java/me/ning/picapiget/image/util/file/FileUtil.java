@@ -27,8 +27,10 @@ public class FileUtil {
 
         File file=new File(filepath);
         if (file.exists() && file.isFile()) {//判断文件目录的存在
+            logger.info("检查文件：文件已存在");
             return file;
         }
+        logger.info("检查文件：文件不存在");
         return null;
 
     }
@@ -39,7 +41,6 @@ public class FileUtil {
         }
         File file=new File(filePath);
         file.createNewFile();
-
         return file;
 
     }
@@ -87,4 +88,8 @@ public class FileUtil {
     }
 
 
+    public static boolean checkExist(File file) {
+        return file.exists()&&file.isFile();
+
+    }
 }

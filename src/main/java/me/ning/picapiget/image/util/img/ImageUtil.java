@@ -15,14 +15,18 @@ public class ImageUtil {
 
     private final static int START_INDEX = 28;
 
-    private final static int END_INDEX = 60;
+    private final static int END_INDEX = 47;
 
-    public static String getImageId(String url){
-        return String.valueOf(url.substring(START_INDEX,END_INDEX));
+    public static String Id(String url){
+        String imageId =  String.valueOf(url.substring(START_INDEX,END_INDEX));
+        logger.info("图片名称："+imageId);
+        return imageId;
     }
 
-    public static void saveToServer(HttpURLConnection connection, String fullPath) throws IOException {
-        logger.info("保存图片：保存到服务器");
+    public static void toServer(String url) throws IOException {
+        HttpURLConnection connection  = RequestUtil.connection(url);
+        String fullPath = fullPath(url);
+        logger.info("保存图片：保存到服务器,路径："+fullPath);
         // 输入流
         InputStream is = null;
         OutputStream os = null;
@@ -50,14 +54,13 @@ public class ImageUtil {
             }
             // 完毕，关闭所有链接
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IOException();
         }finally {
             if(is != null)
             is.close();
             if(os != null)
             os.close();
         }
-        logger.info("保存图片：保存到服务器成功");
     }
 
     public static void deleteFromServer(File file) {
@@ -69,38 +72,29 @@ public class ImageUtil {
 
     }
 
-    public  static String getImageName(String url){
-        String imageId = ImageUtil.getImageId(url);
-        logger.info("图片名称："+imageId);
-        return  imageId+".jpg";
+    public  static String name(String url){
+        String imageId = ImageUtil.Id(url);
+        String fileName = imageId + ".jpg";
+        logger.info("文件名称："+fileName);
+        return  fileName;
     }
 
-    public static String getImageFullPath(String url){
-        String imageName = getImageName(url);
-        return "D:\\UnplashWallpaper\\"+imageName;
+    public static String fullPath(String url){
+        String imageName = ImageUtil.name(url);
+        return "C:\\Users\\yu\\Pictures\\UnsplashWallpaper\\"+imageName;
     }
 
     public static boolean checkAndDownload(String url){
-        HttpURLConnection connection  = RequestUtil.connection(url);
-        String fullPath = getImageFullPath(url);
-        logger.info("完整路径："+fullPath);
-        logger.info("检查本地：开始检查文件是否存在");
-        File file = new File(fullPath);
-        if(file.exists()&&file.isFile()){
-            logger.info("检查文件：已存在");
-            return true;
-        }
+        logger.info("检查本地：并下载图片");
+        String fullPath = ImageUtil.fullPath(url);
         try {
             if(FileUtil.checkExist(fullPath) == null ){
-                logger.info("检查文件：文件不存在，开始下载。");
-                saveToServer(connection, fullPath);
-                file = new File(fullPath);
+                toServer(url);
+                logger.info("保存图片：保存到服务器成功");
             }
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if(file.exists()&&file.isFile()){
-            return true;
         }
         return false;
     }

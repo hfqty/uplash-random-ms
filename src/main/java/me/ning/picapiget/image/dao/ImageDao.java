@@ -15,7 +15,7 @@ public interface ImageDao{
     @Select("select * from images order by create_time desc")
     List<Image> allImages();
 
-    @Insert("insert into images(name,url,create_time) values(#{img.name},#{img.url},#{img.create_time})")
+    @Insert("insert into images(name,url,width,height,file_size,create_time) values(#{img.name},#{img.url},#{img.width},#{img.height},#{img.file_size},#{img.create_time})")
     Integer addImage(@Param("img") Image img);
 
 

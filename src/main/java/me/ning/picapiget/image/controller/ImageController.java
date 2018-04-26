@@ -65,7 +65,7 @@ public class ImageController {
                 outputDTO.setMsg("已存在");
             }else {
                 logger.info("保存图片：保存到数据库");
-                imageService.addImage(new Image(url, new Date()));
+                imageService.addImage(url);
                 outputDTO.setMsg("保存成功");
                 logger.info("保存图片：成功保存");
             }

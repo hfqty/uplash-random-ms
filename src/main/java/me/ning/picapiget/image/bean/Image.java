@@ -1,5 +1,6 @@
 package me.ning.picapiget.image.bean;
 
+import me.ning.picapiget.image.util.datetime.DateTimeUtil;
 import me.ning.picapiget.image.util.img.ImageUtil;
 
 import java.util.Date;
@@ -10,6 +11,13 @@ public class Image {
     private String name;
 
     private String url;
+
+    private float width;
+
+    private float height;
+
+
+    private float file_size;
 
 
     public String getName() {
@@ -23,6 +31,18 @@ public class Image {
     private Date create_time;
 
     public Image() {
+        this.create_time = DateTimeUtil.now();
+    }
+
+
+    public Image(String url){
+        this.create_time = DateTimeUtil.now();
+        this.name = ImageUtil.name(url);
+        this.url = url;
+        this.file_size  = ImageUtil.imgSize(url);
+        this.width = ImageUtil.width(url);
+        this.height = ImageUtil.height(url);
+
     }
 
     public Image( String url, Date create_time) {
@@ -48,6 +68,21 @@ public class Image {
     }
 
 
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
 
     public Date getCreate_time() {
         return create_time;
@@ -56,15 +91,12 @@ public class Image {
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
     }
-    @Override
-    public String toString() {
-        return "Image{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", create_time=" + create_time +
-                '}';
+
+    public float getFile_size() {
+        return file_size;
     }
 
-
+    public void setFile_size(float file_size) {
+        this.file_size = file_size;
+    }
 }

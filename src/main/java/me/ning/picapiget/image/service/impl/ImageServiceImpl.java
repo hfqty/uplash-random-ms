@@ -1,6 +1,5 @@
 package me.ning.picapiget.image.service.impl;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import me.ning.picapiget.image.bean.Image;
 import me.ning.picapiget.image.dao.ImageDao;
 import me.ning.picapiget.image.service.ImageService;
@@ -23,8 +22,8 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public boolean addImage(Image image) {
-        Integer result = imageDao.addImage(image);
+    public boolean addImage(String url) {
+        Integer result = imageDao.addImage(new Image(url));
         if (result > 0) {
             return true;
         } else {

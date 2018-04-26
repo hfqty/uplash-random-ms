@@ -43,9 +43,9 @@ html body{
 }
 
 #images_view>ul li{
-    width:500px;
-    height: 400px;
-    margin: 10%;
+    width:400px;
+    height: 300px;
+    margin: 5%;
     background: #767676;
     float: left;
 

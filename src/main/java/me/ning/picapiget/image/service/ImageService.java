@@ -10,9 +10,11 @@ public interface ImageService {
 
     List<Image> allImages();
 
-    boolean addImage(Image image) throws MySQLIntegrityConstraintViolationException;
+    boolean addImage(Image image) ;
 
     Integer hadImage(String url);
+
+
 
 
 

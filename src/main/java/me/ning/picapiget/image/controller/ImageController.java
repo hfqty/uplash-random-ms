@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import me.ning.picapiget.image.bean.Image;
 import me.ning.picapiget.image.dto.OutputDTO;
 import me.ning.picapiget.image.service.ImageService;
+import me.ning.picapiget.image.service.TodayService;
 import me.ning.picapiget.image.util.http.ResponseUtil;
 import me.ning.picapiget.image.util.img.ImageUtil;
 import me.ning.picapiget.image.util.url.URLUtil;
@@ -30,8 +31,12 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
+    @Autowired
+    private TodayService todayService;
+
     @RequestMapping("/url")
     public String url() {
+        todayService.incrase();
         return URLUtil.RedirectUrl();
     }
 

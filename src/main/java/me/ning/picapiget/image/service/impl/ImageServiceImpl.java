@@ -23,7 +23,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public boolean addImage(Image image) throws MySQLIntegrityConstraintViolationException {
+    public boolean addImage(Image image) {
         Integer result = imageDao.addImage(image);
         if (result > 0) {
             return true;
@@ -39,4 +39,7 @@ public class ImageServiceImpl implements ImageService {
             return 0;
         return images.size();
     }
+
+
+
 }

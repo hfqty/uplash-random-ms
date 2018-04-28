@@ -70,6 +70,7 @@ public class ImageController {
                 logger.info("保存图片：成功保存");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             outputDTO.setMsg("已经有了");
         }
         return outputDTO;

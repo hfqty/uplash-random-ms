@@ -12,21 +12,27 @@ import me.ning.picapiget.image.util.file.FileUtil;
 import me.ning.picapiget.image.util.http.RequestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.util.Collection;
+import java.util.Properties;
 
 public class ImageUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(ImageUtil.class);
+    private final static  Logger logger = LoggerFactory.getLogger(ImageUtil.class);
 
     private final static int START_INDEX = 28;
 
     private final static int END_INDEX = 47;
 
     private final static BigDecimal K = BigDecimal.valueOf(1024);
+
+
 
     public static String Id(String url){
         String imageId =  String.valueOf(url.substring(START_INDEX,END_INDEX));
@@ -166,8 +172,11 @@ public class ImageUtil {
     }
 
     public static String fullPath(String url){
-        String imageName = ImageUtil.name(url);
-        return "C:\\Users\\yu\\Pictures\\UnsplashWallpaper\\"+imageName;
+
+        String basePath ="C:\\Users\\Administrator\\Pictures\\UnsplashWallpaper\\";
+        logger.info("基础路径：basePath:"+basePath);
+        String imageName = name(url);
+        return basePath+imageName;
     }
 
     public static boolean checkAndDownload(String url){

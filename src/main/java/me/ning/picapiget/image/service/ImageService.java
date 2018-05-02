@@ -11,7 +11,7 @@ public interface ImageService {
 
     boolean addImage(String url) ;
 
-    Integer hadImage(String url);
+    boolean hadImage(String url);
 
 
 

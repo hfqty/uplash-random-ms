@@ -10,8 +10,16 @@ $(function(){
             $("#auto_random").text("是");
         }
     });
-})
 
+    $("#google_search_btn").click(function () {
+        var searchUrl = "https://www.google.com/search?q=";
+        var searchKeyWord = $("#keyword").val();
+        if(searchKeyWord != ''){
+            location.href = searchUrl+ searchKeyWord;
+        }
+    });
+
+})
 
 function random_image(){
     var url = "/image/url";
@@ -98,3 +106,4 @@ function back_pre_img(){
 function getConfig() {
     return $("#auto_random").text();
 }
+

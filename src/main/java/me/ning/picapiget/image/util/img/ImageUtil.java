@@ -12,15 +12,11 @@ import me.ning.picapiget.image.util.file.FileUtil;
 import me.ning.picapiget.image.util.http.RequestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
-
 import java.io.*;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.util.Collection;
-import java.util.Properties;
 
 public class ImageUtil {
 
@@ -28,9 +24,11 @@ public class ImageUtil {
 
     private final static int START_INDEX = 28;
 
-    private final static int END_INDEX = 47;
+    private final static int END_INDEX = 60;
 
     private final static BigDecimal K = BigDecimal.valueOf(1024);
+    @Value("${img.save.path}")
+    private String imageSavePath;
 
 
 
@@ -53,7 +51,7 @@ public class ImageUtil {
     }
 
 
-    private static ImageExifInfo imgInfo(String url){
+    public static ImageExifInfo imgInfo(String url){
         ImageExifInfo imageExifInfo = new ImageExifInfo();
         File img_File = new File(fullPath(url));
         try {
@@ -172,9 +170,14 @@ public class ImageUtil {
     }
 
     public static String fullPath(String url){
+        ImageUtil imageUtil = new ImageUtil();
+        String basePath = imageUtil.imageSavePath;
+        logger.info("配置路径："+basePath);
+        if(basePath == null){
+            basePath  =  "C:\\Users\\Administrator\\Pictures\\UnsplashWallpaper\\";
+            logger.info("默认路径："+basePath);
+        }
 
-        String basePath ="C:\\Users\\Administrator\\Pictures\\UnsplashWallpaper\\";
-        logger.info("基础路径：basePath:"+basePath);
         String imageName = name(url);
         return basePath+imageName;
     }

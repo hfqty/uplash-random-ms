@@ -36,13 +36,13 @@ public class Image {
 
 
     public Image(String url){
+        ImageExifInfo imageExifInfo = ImageUtil.imgInfo(url);
         this.create_time = DateTimeUtil.now();
-        this.name = ImageUtil.name(url);
+        this.name = ImageUtil.Id(url);
         this.url = url;
         this.file_size  = ImageUtil.imgSize(url);
-        this.width = ImageUtil.width(url);
-        this.height = ImageUtil.height(url);
-
+        this.width = imageExifInfo.getWidth();
+        this.height = imageExifInfo.getHeight();
     }
 
     public Image( String url, Date create_time) {

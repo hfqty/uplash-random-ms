@@ -60,7 +60,7 @@ public class ImageController {
         OutputDTO outputDTO = new OutputDTO();
         try {
             ImageUtil.checkAndDownload(url);
-            boolean had = imageService.hadImage(url) > 0;
+            boolean had = imageService.hadImage(url);
             if (had) {
                 outputDTO.setMsg("已存在");
             }else {
@@ -79,12 +79,11 @@ public class ImageController {
     @RequestMapping("/had")
     public OutputDTO had(String url) {
         OutputDTO outputDTO = new OutputDTO();
-        boolean result = imageService.hadImage(url) > 0;
+        boolean result = imageService.hadImage(url);
         if (result) {
             outputDTO.setMsg("已存在");
-
         }else{
-            outputDTO.setCode("1");
+            outputDTO.setCode("-1");
             outputDTO.setMsg("不存在");
         }
         return outputDTO;

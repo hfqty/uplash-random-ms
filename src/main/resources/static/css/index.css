@@ -3,7 +3,8 @@ html,body{overflow:hidden;overflow-y:auto;
 
 .search_panel{
     width: 100%;
-    height:120px;
+    height:60px;
+    display: none;
 }
 
 .big_input{
@@ -30,7 +31,7 @@ html,body{overflow:hidden;overflow-y:auto;
 }
 #top_nav>ul{
    list-style: none;
-    background: #cccccc;
+    background: #dddddd;
 
 }
 
@@ -59,7 +60,6 @@ html,body{overflow:hidden;overflow-y:auto;
 
 
 a:hover{
-    color: #888888;
 }
 
 a:active{

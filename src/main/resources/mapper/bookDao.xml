@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.ning.pro.dao.book.BookDao">
+
+    <select id="queryAll" resultType="me.ning.pro.entity.book.Book">
+
+        select book_id,name,author,press,publication_date,
+        pages_num,price,isbn,create_time,update_time
+        from books
+        where deleted = 0
+        order by create_time desc
+    </select>
+
+    <select id="queryBooks" parameterType="me.ning.pro.entity.book.Book" resultType="me.ning.pro.entity.book.Book">
+        select book_id,name,author,press,publication_date,
+        pages_num,price,isbn,create_time,update_time
+        from books
+        <where>
+            deleted = 0
+            <if test="name != null">and name like CONCAT(CONCAT('%',#{name}),'%')  </if>
+            <if test="name != null">and isbn like CONCAT(CONCAT('%',#{ISBN}),'%')  </if>
+            <if test="name != null">and author like CONCAT(CONCAT('%',#{author}),'%')  </if>
+            <if test="name != null">and press like CONCAT(CONCAT('%',#{press}),'%')  </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="queryBookById" resultType="me.ning.pro.entity.book.Book" parameterType="Integer">
+      select book_id,name,author,press,publication_date,
+      pages_num,price,isbn,create_time,update_time
+      from books
+      where book_id = #{bookId}
+    </select>
+
+    <select id="queryBookByISBN" resultType="me.ning.pro.entity.book.Book" >
+        select book_id,name,author,press,publication_date,
+        pages_num,price,isbn,create_time,update_time
+        from books
+        where
+          deleted=0
+          and
+            isbn like CONCAT(CONCAT('%',#{ISBN}),'%')
+    </select>
+
+    <select id="queryBookByName" resultType="me.ning.pro.entity.book.Book">
+        select book_id,name,author,press,publication_date,
+        pages_num,price,isbn,create_time,update_time
+        from books
+        where
+          deleted = 0
+          and
+          name like CONCAT(CONCAT('%',#{name}),'%')
+    </select>
+
+    <insert id="insertBook" parameterType="me.ning.pro.entity.book.Book"
+            useGeneratedKeys="true" keyProperty="bookId" keyColumn="book_id">
+
+        insert into books(name,author,press,publication_date,pages_num,
+        price,isbn,create_time,update_time)
+        values (
+        #{name},
+        #{author},
+        #{press},
+        #{publicationDate},
+        #{pagesNum},
+        #{price},
+        #{ISBN},
+        #{createTime},
+        #{updateTime})
+    </insert>
+
+    <insert id="insertBooks" parameterType="java.util.List" >
+          insert into books(name ,author,press,publication_date,pages_num,
+          price, isbn,create_time,update_time)
+        values
+          <foreach collection="books" item="book" separator=",">
+              (#{book.name},
+              #{book.author},
+              #{book.press},
+              #{book.publicationDate},
+              #{book.pagesNum},
+              #{book.price},
+              #{book.ISBN},
+              #{book.createTime},
+              #{book.updateTime})
+          </foreach>
+
+    </insert>
+
+    <update id="updateBook" parameterType="me.ning.pro.entity.book.Book">
+        update books
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="author != null">author = #{author},</if>
+            <if test="press != null">press = #{press},</if>
+            <if test="publicationDate != null">publication_date = #{publicationDate},</if>
+            <if test="pagesNum != null">pages_num = #{pagesNum},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="ISBN != null" >isbn = #{ISBN},</if>
+            update_time = now()
+            where book_id = #{bookId}
+        </set>
+    </update>
+
+
+
+    <update id="deleteBookById">
+        update books set
+        deleted = 1
+        where book_id = #{bookId}
+    </update>
+
+    <update id="deleteBooks">
+        update  books
+        set deleted = 1
+        where book_id in
+        (
+        <foreach collection="bookIds" item="bookId" separator=",">
+            #{bookId}
+        </foreach>
+         )
+    </update>
+
+</mapper>

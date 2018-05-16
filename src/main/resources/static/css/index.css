@@ -25,7 +25,8 @@ html,body{overflow:hidden;overflow-y:auto;
 }
 #top_nav>ul{
     height: 50px;
-    width: 97%;
+    width: 80%;
+    margin: 10px 5%;
     color: #ffffff;
     border-radius: 5px;
 }

@@ -40,8 +40,8 @@ public class ImageServiceImpl implements ImageService {
     public boolean hadImage(String url) {
         List<Image> images = imageDao.hadImage(ImageUtil.Id(url));
         boolean result = (images == null || images.isEmpty());
-        String canSave = result ?"可":"不可";
-        logger.info("是否可存:"+canSave);
+        String canSave = result ?"可以":"有了";
+        logger.info("可以存吗:"+canSave);
         return !result;
     }
 

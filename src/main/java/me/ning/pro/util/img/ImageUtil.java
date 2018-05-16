@@ -137,6 +137,14 @@ public class ImageUtil {
             BigDecimal fileSize = BigDecimal.valueOf(contentLength);
             BigDecimal downloaded = BigDecimal.ZERO;
             BigDecimal count= BigDecimal.valueOf(0.1);
+            BigDecimal fileSizeKB = fileSize.divide(BigDecimal.valueOf(1024),3,BigDecimal.ROUND_HALF_UP);
+            if(fileSizeKB.compareTo(BigDecimal.valueOf(1024))>=0){
+                BigDecimal fileSizeMB  = fileSizeKB.divide(BigDecimal.valueOf(1024),3,BigDecimal.ROUND_HALF_UP);
+                logger.info("图片大小："+fileSizeMB+"MB");
+            }
+            else
+            logger.info("图片大小："+fileSizeKB+"KB");
+
             // 读取到的数据长度
             int len;
             // 输出的文件流
@@ -189,10 +197,8 @@ public class ImageUtil {
     public static String fullPath(String url){
         ImageUtil imageUtil = new ImageUtil();
         String basePath = imageUtil.imageSavePath;
-        logger.info("配置路径："+basePath);
         if(basePath == null){
             basePath  =  "C:\\dev\\UnsplashWallpaper\\";
-
             File file = new File(basePath);
             if(!file.exists()){
                 file.mkdir();
@@ -237,7 +243,7 @@ public class ImageUtil {
             int num2 = 100 -num;
             System.out.print("<"+num+"%>");
             for(int i = 0; i< num;i++){
-                System.out.print("+");
+                System.out.print(">");
             }
             for(int j = 0;j<num2;j++){
                 System.out.print("-");

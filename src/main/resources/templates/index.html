@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div class="search_panel">
+<div class="search_panel" hidden>
     <input type="text" class="big_input" name="keyword" id="keyword">
     <input type="button" id="google_search_btn" class="big_btn" value="搜索">
 </div>
@@ -68,22 +68,28 @@
         <li><a href="#nav_bar">有图</a></li>
         <li><a href="javascript:;" onclick="download_table_image()">此图</a></li>
         <li id="back_pre_btn" onclick="back_pre_img()" hidden>上图</li>
-        <li>自动:<span id="auto_random">是</span></li>
+        <li><a id="auto_random">自动:<span>否</span></a></li>
+        <li><a id="original_img">原图:<span>否</span></a></li>
     </ul>
     <h1 id="msg" hidden></h1>
 </div>
 
+
+<div style="margin:5%;width: 100%;height: 10px">
+    <h1 style="font-size: 200%;">所有</h1>
+    <p style="font-size: 80%;">这里是所有已经保存的</p>
+</div>
+<div id="images_view">
+    <ul id="images_ul">
+    </ul>
+</div>
 <div class="page_bar" id="nav_bar" hidden>
     <ul style="width: 100%">
-        <li>总页数：<span id="pages"></span></li>
-        <li>总数：<span id="total"></span></li>
+        <li >总页数：<span  id="pages"></span></li>
+        <li >总数：<span id="total"></span></li>
         <li>当前位置：<span id="pageNum"></span></li>
         <li>此页个数:<span id="pageSize"></span></li>
     </ul>
-
-</div>
-<div style="width: 100%;height: 1%">
-
 </div>
 <div class="page_bar">
     <ul>
@@ -93,13 +99,6 @@
         <li><input id="in_pageNum" type="text" placeholder="页数"/></li>
         <li onclick="find_page()"><a>查询</a></li>
         <br>
-    </ul>
-</div>
-<div style="width: 100%;height: 10px">
-
-</div>
-<div id="images_view">
-    <ul id="images_ul">
     </ul>
 </div>
 </body>

@@ -1,7 +1,10 @@
-$(function(){
-all_images(1,9);
+$(function() {
+    all_images(1, 9);
 
-})
+    $("#nav_bar span").addClass("page-info");
+
+
+});
 
 function all_images(num,size){
 
@@ -19,17 +22,25 @@ function all_images(num,size){
             $("#nav_bar").show();
             $.each(data.row,function(i,img){
                var imgli = $("<li ></li>");
-               var imgimg = $("<img onclick='lgimg(this)'/>");
-               var url_text = $("<p hidden></p>");
+               var img_date_div = $("<div class='img_date'></div>");
+               var imgimg = $("<img class='img-ul-show' onclick='lgimg(this)'/>");
+               var url_text = $("<p id='name"+img.name+"' class='img-create-date' hidden></p>");
                 var small_url = getUrl(img.url,400,300);
-               url_text.text(small_url);
+               url_text.text(img.create_time);
                imgimg.attr("src",small_url);
-               imgli.append(imgimg).append(url_text);
+               img_date_div.append(imgimg).append(url_text);
+               imgli.append(img_date_div);
                $("#images_ul").append(imgli);
 
            })
         }
     })
+}
+
+
+function dateDiv(){
+    var div = "<div class='img_date'></div>";
+    return div;
 }
 
 function find_page(){
@@ -71,12 +82,18 @@ function getBigUrl(url,w,h){
     var c = url.substring(124);
     return a+w+b+h+c;
 }
+
+function getImgName(url){
+    var id = url.substring(28,60);
+    return id;
+}
 function lgimg(img){
     $("#back_pre_btn").show();
     var smallurl = img.src;
     var largeurl = getBigUrl(smallurl,1920,1080);
     show_table_image(largeurl);
     location.href="#image_info";
+    $("#name"+getImgName(img.src)).show();
 }
 
 function show_table_image(image_url){
@@ -87,3 +104,4 @@ function show_table_image(image_url){
 function download_table_image(){
     location.href = "image/download?url="+$("#table_image_url").text();
 }
+

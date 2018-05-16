@@ -13,4 +13,8 @@ public class DateTimeUtil {
     public static Date now(){
         return new Date();
     }
+
+    public static String nowStr(){
+        return datetimeFormat.format(new Date());
+    }
 }

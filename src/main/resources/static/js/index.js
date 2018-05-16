@@ -4,10 +4,10 @@ $(function(){
     random_image();
 
     $("#auto_random").click(function () {
-        if($("#auto_random").text()=="是"){
-            $("#auto_random").text("否");
+        if($("#auto_random>span").text()=="是"){
+            $("#auto_random>span").text("否");
         }else{
-            $("#auto_random").text("是");
+            $("#auto_random>span").text("是");
         }
     });
 
@@ -104,6 +104,6 @@ function back_pre_img(){
 }
 
 function getConfig() {
-    return $("#auto_random").text();
+    return $("#auto_random>span").text();
 }
 

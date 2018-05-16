@@ -119,7 +119,7 @@ public class ImageUtil {
     }
 
     public static void toServer(String url) throws IOException {
-        HttpURLConnection connection  = RequestUtil.connection(url);
+        HttpURLConnection connection  = RequestUtil.connection(bigImgUrl(url));
         String fullPath = fullPath(url);
         logger.info("保存图片：保存到服务器,路径："+fullPath);
         // 输入流
@@ -136,16 +136,22 @@ public class ImageUtil {
             BigDecimal writed = BigDecimal.ZERO;
             BigDecimal fileSize = BigDecimal.valueOf(contentLength);
             BigDecimal downloaded = BigDecimal.ZERO;
+            BigDecimal count= BigDecimal.valueOf(0.1);
             // 读取到的数据长度
             int len;
             // 输出的文件流
             // 开始读取
             while ((len = is.read(bs)) != -1) {
+
                 downloaded = BigDecimal.valueOf(len);
                 writed = writed.add(downloaded);
                 downloaded = writed.divide(fileSize,10,BigDecimal.ROUND_HALF_UP);
+                if(downloaded.compareTo(count)>0){
                 logger.info("下载进度："+downloaded+",("+writed+"/"+fileSize+")");
+                }
                 os.write(bs, 0, len);
+                count=  count.add(BigDecimal.valueOf(0.1));
+
             }
             // 完毕，关闭所有链接
         } catch (IOException e) {
@@ -156,6 +162,10 @@ public class ImageUtil {
             if(os != null)
             os.close();
         }
+    }
+
+    private static String bigImgUrl(String url) {
+        return url.substring(0,END_INDEX);
     }
 
     public static void deleteFromServer(File file) {

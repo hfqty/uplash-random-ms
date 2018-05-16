@@ -16,8 +16,9 @@ public class Image {
 
     private float height;
 
-
     private float file_size;
+
+    private Date create_time;
 
 
     public String getName() {
@@ -28,7 +29,6 @@ public class Image {
         this.name = name;
     }
 
-    private Date create_time;
 
     public Image() {
         this.create_time = DateTimeUtil.now();

@@ -1,5 +1,5 @@
 html,body{overflow:hidden;overflow-y:auto;
-    margin: 0 -10px;height: 100%}
+}
 
 .search_panel{
     width: 100%;
@@ -31,7 +31,7 @@ html,body{overflow:hidden;overflow-y:auto;
 }
 #top_nav>ul{
    list-style: none;
-    background: #dddddd;
+    background: #ffffff;
 
 }
 
@@ -56,6 +56,10 @@ html,body{overflow:hidden;overflow-y:auto;
     margin: 10px auto;
 }
 
+#image_show{
+    background-size: 100% 100%;
+}
+
 
 
 
@@ -77,6 +81,7 @@ a{
     color: #000;
     display: block;
     text-decoration: none;
+    cursor: pointer;
 }
 
 #msg{

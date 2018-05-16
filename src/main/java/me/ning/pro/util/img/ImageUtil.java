@@ -39,7 +39,6 @@ public class ImageUtil {
 
     public static String Id(String url){
         String imageId =  String.valueOf(url.substring(START_INDEX,END_INDEX));
-        logger.info("图片名称："+imageId);
         return imageId;
     }
 
@@ -121,7 +120,6 @@ public class ImageUtil {
     public static void toServer(String url) throws IOException {
         HttpURLConnection connection  = RequestUtil.connection(bigImgUrl(url));
         String fullPath = fullPath(url);
-        logger.info("保存图片：保存到服务器,路径："+fullPath);
         // 输入流
         InputStream is = null;
         OutputStream os = null;
@@ -190,7 +188,6 @@ public class ImageUtil {
     public  static String name(String url){
         String imageId = ImageUtil.Id(url);
         String fileName = imageId + ".jpg";
-        logger.info("文件名称："+fileName);
         return  fileName;
     }
 
@@ -204,7 +201,6 @@ public class ImageUtil {
                 file.mkdir();
                 logger.info("目录不存在，重新创建");
             }
-            logger.info("默认路径："+basePath);
         }
 
         String imageName = name(url);

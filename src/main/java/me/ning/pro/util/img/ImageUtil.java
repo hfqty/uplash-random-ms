@@ -235,6 +235,7 @@ public class ImageUtil {
             count = count.multiply(BigDecimal.valueOf(100));
             int num = count.intValue();
             int num2 = 100 -num;
+            System.out.print("<"+num+"%>");
             for(int i = 0; i< num;i++){
                 System.out.print("+");
             }

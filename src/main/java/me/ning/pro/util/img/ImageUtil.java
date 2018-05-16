@@ -146,11 +146,13 @@ public class ImageUtil {
                 downloaded = BigDecimal.valueOf(len);
                 writed = writed.add(downloaded);
                 downloaded = writed.divide(fileSize,10,BigDecimal.ROUND_HALF_UP);
-                if(downloaded.compareTo(count)>0){
-                logger.info("下载进度："+downloaded+",("+writed+"/"+fileSize+")");
+                if(downloaded.compareTo(count)>=0){
+                    showDownloadPro(downloaded);
+                    count=  count.add(BigDecimal.valueOf(0.1));
+//                logger.info("下载进度："+downloaded+",("+writed+"/"+fileSize+")");
                 }
                 os.write(bs, 0, len);
-                count=  count.add(BigDecimal.valueOf(0.1));
+
 
             }
             // 完毕，关闭所有链接
@@ -216,5 +218,30 @@ public class ImageUtil {
             e.printStackTrace();
         }
         return false;
+    }
+
+
+    public static void showDownloadPro(BigDecimal downloaded){
+        System.out.print("进度：");
+        showPro(downloaded);
+    }
+
+    public static void showPro(BigDecimal count){
+        if(count == null ||count.compareTo(BigDecimal.ZERO)<=0){
+            for(int i=0;i<100;i++){
+                System.out.print("-");
+            }
+        }else{
+            count = count.multiply(BigDecimal.valueOf(100));
+            int num = count.intValue();
+            int num2 = 100 -num;
+            for(int i = 0; i< num;i++){
+                System.out.print("+");
+            }
+            for(int j = 0;j<num2;j++){
+                System.out.print("-");
+            }
+            System.out.println();
+        }
     }
 }

@@ -25,6 +25,7 @@ public class ImageUtil {
     private final static int END_INDEX = 60;
 
     private final static BigDecimal K = BigDecimal.valueOf(1024);
+
     @Value("${img.save.path}")
     private String imageSavePath;
 
@@ -35,87 +36,29 @@ public class ImageUtil {
 
     private final static int FIRST = IS_FIRST;
 
-
+    private static String bigImgUrl(String url) {
+        return url.substring(0,END_INDEX);
+    }
 
     public static String Id(String url){
         String imageId =  String.valueOf(url.substring(START_INDEX,END_INDEX));
         return imageId;
     }
 
-
-
+    public  static String name(String url){
+        String fileName = ImageUtil.Id(url)+ ".jpg";
+        return  fileName;
+    }
     public static float imgSize(String url){
-    HttpURLConnection connection = RequestUtil.connection(url);
-    int contentLength= connection.getContentLength();
-    if(contentLength <= 0)
-        return 0;
-    BigDecimal fileSize = BigDecimal.valueOf(contentLength).divide(K);
-    return fileSize.floatValue();
+        HttpURLConnection connection = RequestUtil.connection(url);
+        int contentLength= connection.getContentLength();
+        if(contentLength <= 0)
+            return 0;
+        BigDecimal fileSize = BigDecimal.valueOf(contentLength).divide(ImageUtil.K);
+        return fileSize.floatValue();
 
     }
 
-
-    public static ImageExifInfo imgInfo(String url){
-        ImageExifInfo imageExifInfo = new ImageExifInfo();
-        File img_File = new File(fullPath(url));
-        try {
-            Metadata img_Metadata = JpegMetadataReader.readMetadata(img_File);
-            //Directory img_exif = img_Metadata.getDirectory(ExifIFD0Directory.class);
-//            if(img_exif == null)
-//                return imageExifInfo;
-            Iterable<Directory> img_exifs = img_Metadata.getDirectories();
-            if(img_exifs == null)
-                return imageExifInfo;
-            for(Directory img_exif : img_exifs) {
-                Collection<Tag> img_tags = img_exif.getTags();
-                for (Tag img_tag : img_tags) {
-                    if (img_tag.getTagName().contains("Unknown")) {
-                        imageExifInfo.setUnknown(img_tag.getDescription());
-                    } else if (img_tag.getTagName().contains("Make")) {
-                        imageExifInfo.setMake(img_tag.getDescription());
-                    } else if (img_tag.getTagName().contains("Model")) {
-                        imageExifInfo.setModel(img_tag.getDescription());
-                    } else if (img_tag.getTagName().contains("Image Width")) {
-                        imageExifInfo.setWidth(Float.parseFloat(img_tag.getDescription().substring(0,4)));
-                    } else if (img_tag.getTagName().contains("Image Height")) {
-                        imageExifInfo.setHeight(Float.parseFloat(img_tag.getDescription().substring(0,4)));
-                    } else if (img_tag.getTagName().contains("Resolution Unit")) {
-                        imageExifInfo.setResolutionUnit(img_tag.getDescription());
-                    } else if (img_tag.getTagName().contains("Software")) {
-                        imageExifInfo.setSoftware(img_tag.getDescription());
-                    } else if (img_tag.getTagName().contains("Date/Time")) {
-                        imageExifInfo.setDateTime(img_tag.getDescription());
-                    } else if (img_tag.getTagName().contains("YCbCr Positioning")) {
-                        imageExifInfo.setCbcrPositioning(img_tag.getDescription());
-                    } else if (img_tag.getTagName().contains("Orientation")) {
-                        imageExifInfo.setOrientation(img_tag.getDescription());
-                    }
-                }
-            }
-        } catch (JpegProcessingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        logger.info(imageExifInfo.toString());
-        return imageExifInfo;
-    }
-
-
-    public static float width (String url){
-       float width =  imgInfo(url).getWidth();
-       if(width == 0){
-           return 1920;
-       }
-       return width;
-    }
-
-    public static float height(String url){
-        float height = imgInfo(url).getHeight();
-        if(height == 0)
-            return 1080;
-        return height;
-    }
 
     public static void toServer(String url) throws IOException {
         HttpURLConnection connection  = RequestUtil.connection(bigImgUrl(url));
@@ -158,8 +101,6 @@ public class ImageUtil {
 //                logger.info("下载进度："+downloaded+",("+writed+"/"+fileSize+")");
                 }
                 os.write(bs, 0, len);
-
-
             }
             // 完毕，关闭所有链接
         } catch (IOException e) {
@@ -172,9 +113,7 @@ public class ImageUtil {
         }
     }
 
-    private static String bigImgUrl(String url) {
-        return url.substring(0,END_INDEX);
-    }
+
 
     public static void deleteFromServer(File file) {
         if(file.delete()){
@@ -185,11 +124,7 @@ public class ImageUtil {
 
     }
 
-    public  static String name(String url){
-        String imageId = ImageUtil.Id(url);
-        String fileName = imageId + ".jpg";
-        return  fileName;
-    }
+
 
     public static String fullPath(String url){
         ImageUtil imageUtil = new ImageUtil();

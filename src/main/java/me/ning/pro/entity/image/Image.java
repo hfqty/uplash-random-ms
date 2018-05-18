@@ -1,6 +1,7 @@
 package me.ning.pro.entity.image;
 
 import me.ning.pro.util.datetime.DateTimeUtil;
+import me.ning.pro.util.img.ImageInfoUtil;
 import me.ning.pro.util.img.ImageUtil;
 
 import java.util.Date;
@@ -36,7 +37,7 @@ public class Image {
 
 
     public Image(String url){
-        ImageExifInfo imageExifInfo = ImageUtil.imgInfo(url);
+        ImageExifInfo imageExifInfo = ImageInfoUtil.imgInfo(url);
         this.create_time = DateTimeUtil.now();
         this.name = ImageUtil.Id(url);
         this.url = url;

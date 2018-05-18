@@ -27,6 +27,8 @@ public class ImageController {
 
     private final Logger logger = LoggerFactory.getLogger(ImageController.class);
 
+    private final static String BASE_URL = "https://source.unsplash.com/random/1920x1080";
+
     @Autowired
     private ImageService imageService;
 
@@ -36,7 +38,7 @@ public class ImageController {
     @RequestMapping("/url")
     public String url() {
         todayService.incrase();
-        return URLUtil.RedirectUrl();
+        return URLUtil.RedirectUrl(this.BASE_URL);
     }
 
     @RequestMapping("/all")

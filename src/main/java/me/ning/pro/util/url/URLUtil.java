@@ -7,9 +7,8 @@ import java.net.HttpURLConnection;
 public class URLUtil {
 
 
-    public static String RedirectUrl(){
+    public static String RedirectUrl(String url){
         try {
-            String url = "https://source.unsplash.com/random/1920x1080";
             System.out.println("访问地址:" + url);
             HttpURLConnection conn = RequestUtil.connection(url);
             String location = conn.getHeaderField("Location");

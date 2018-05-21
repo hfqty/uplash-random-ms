@@ -1,13 +1,21 @@
 
 .page_bar{
-   width: 100%;
-    height: 10%;
+   width: 200px;
+    position: fixed;
+    top: 50%;
 
+}
+
+
+
+#nav_menu{
+    right: 3%;
+}
+.content-front{
+    position:absolute;
 }
 .page_bar ul{
     width: 100%;
-    height: 10%;
-    margin: 0 auto;
     list-style: none;
 }
 
@@ -38,13 +46,15 @@
 }
 
 #images_view>ul li{
-    width:400px;
-    height: 300px;
-    margin: 5%;
+    width:640px;
+    height: 480px;
+    margin: 2% 10px;
     background: #767676;
     float: left;
 
 }
+
+
 img{
     background-size: 100% 100%;
 }
@@ -55,7 +65,7 @@ input{
 }
 
 .img_date{
-    width: 400%;
+    width: 400px;
     height: 300px;
     z-index: 0;
 }

@@ -5,15 +5,12 @@ import com.drew.imaging.jpeg.JpegProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
-import me.ning.pro.entity.image.ImageExifInfo;
-import me.ning.pro.util.http.RequestUtil;
+import me.ning.pro.image.entity.ImageExifInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.net.HttpURLConnection;
 import java.util.Collection;
 
 public class ImageInfoUtil {

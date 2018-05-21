@@ -23,9 +23,9 @@ function all_images(num,size){
             $.each(data.row,function(i,img){
                var imgli = $("<li ></li>");
                var img_date_div = $("<div class='img_date'></div>");
-               var imgimg = $("<img class='img-ul-show' onclick='lgimg(this)'/>");
-               var url_text = $("<p id='name"+img.name+"' class='img-create-date' hidden></p>");
-                var small_url = getUrl(img.url,400,300);
+               var imgimg = $("<image class='image-ul-show' onclick='lgimg(this)'/>");
+               var url_text = $("<p id='name"+img.name+"' class='image-create-date' hidden></p>");
+                var small_url = getUrl(img.url,640,480);
                url_text.text(img.create_time);
                imgimg.attr("src",small_url);
                img_date_div.append(imgimg).append(url_text);

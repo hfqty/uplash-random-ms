@@ -8,7 +8,8 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>uplash-random-ms</name>
+    <name>one
+    </name>
     <description>get some pic from uplash</description>
 
     <parent>

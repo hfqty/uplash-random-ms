@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="me.ning.pro.dao.book.BookDao">
+<mapper namespace="me.ning.pro.book.dao.BookDao">
 
-    <select id="queryAll" resultType="me.ning.pro.entity.book.Book">
+    <select id="queryAll" resultType="me.ning.pro.book.entity.Book">
 
         select book_id,name,author,press,publication_date,
         pages_num,price,isbn,create_time,update_time
@@ -14,7 +14,7 @@
         order by create_time desc
     </select>
 
-    <select id="queryBooks" parameterType="me.ning.pro.entity.book.Book" resultType="me.ning.pro.entity.book.Book">
+    <select id="queryBooks" parameterType="me.ning.pro.book.entity.Book" resultType="me.ning.pro.book.entity.Book">
         select book_id,name,author,press,publication_date,
         pages_num,price,isbn,create_time,update_time
         from books
@@ -28,14 +28,14 @@
         order by create_time desc
     </select>
 
-    <select id="queryBookById" resultType="me.ning.pro.entity.book.Book" parameterType="Integer">
+    <select id="queryBookById" resultType="me.ning.pro.book.entity.Book" parameterType="Integer">
       select book_id,name,author,press,publication_date,
       pages_num,price,isbn,create_time,update_time
       from books
       where book_id = #{bookId}
     </select>
 
-    <select id="queryBookByISBN" resultType="me.ning.pro.entity.book.Book" >
+    <select id="queryBookByISBN" resultType="me.ning.pro.book.entity.Book" >
         select book_id,name,author,press,publication_date,
         pages_num,price,isbn,create_time,update_time
         from books
@@ -45,7 +45,7 @@
             isbn like CONCAT(CONCAT('%',#{ISBN}),'%')
     </select>
 
-    <select id="queryBookByName" resultType="me.ning.pro.entity.book.Book">
+    <select id="queryBookByName" resultType="me.ning.pro.book.entity.Book">
         select book_id,name,author,press,publication_date,
         pages_num,price,isbn,create_time,update_time
         from books
@@ -55,7 +55,7 @@
           name like CONCAT(CONCAT('%',#{name}),'%')
     </select>
 
-    <insert id="insertBook" parameterType="me.ning.pro.entity.book.Book"
+    <insert id="insertBook" parameterType="me.ning.pro.book.entity.Book"
             useGeneratedKeys="true" keyProperty="bookId" keyColumn="book_id">
 
         insert into books(name,author,press,publication_date,pages_num,
@@ -90,7 +90,7 @@
 
     </insert>
 
-    <update id="updateBook" parameterType="me.ning.pro.entity.book.Book">
+    <update id="updateBook" parameterType="me.ning.pro.book.entity.Book">
         update books
         <set>
             <if test="name != null">name = #{name},</if>

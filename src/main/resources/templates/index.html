@@ -83,23 +83,25 @@
     <ul id="images_ul">
     </ul>
 </div>
-<div class="page_bar" id="nav_bar" hidden>
-    <ul style="width: 100%">
+<div class="page_bar"  id="nav_menu" hidden>
+    <ul   id="nav_bar"  style="width: 100%">
         <li >总页数：<span  id="pages"></span></li>
         <li >总数：<span id="total"></span></li>
         <li>当前位置：<span id="pageNum"></span></li>
         <li>此页个数:<span id="pageSize"></span></li>
-    </ul>
-</div>
-<div class="page_bar">
-    <ul>
+    <!--</ul>-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="page_bar">&ndash;&gt;-->
+    <!--<ul>-->
         <li id="pre_page" onclick="pre_page()">上一页</li>
         <li id="next_page" onclick="next_page()">下一页</li>
         <li><input id="in_pageSize" type="text" placeholder="个数"/></li>
         <li><input id="in_pageNum" type="text" placeholder="页数"/></li>
         <li onclick="find_page()"><a>查询</a></li>
-        <br>
     </ul>
+    <button onclick="show_and_hide_page_nav()" id="show_nav_btn">
+        显示
+    </button>
 </div>
 </body>
 </html>

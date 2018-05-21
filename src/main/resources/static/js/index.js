@@ -18,7 +18,13 @@ $(function(){
             location.href = searchUrl+ searchKeyWord;
         }
     });
-
+    $(window).scroll(function () {
+        if(window.scrollY>=1100){
+            $("#nav_menu").show();
+        }else{
+            $("#nav_menu").hide();
+        }
+    });
 })
 
 function random_image(){
@@ -107,3 +113,11 @@ function getConfig() {
     return $("#auto_random>span").text();
 }
 
+function show_and_hide_page_nav(){
+    $("#nav_bar").toggle();
+    if($("#nav_bar").hidden){
+        $("#show_nav_btn").text("隐藏");
+    }else{
+        $("#show_nav_btn").text("显示");
+    }
+}

@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class PropertiesTest {
 	
-	 @Value("${img.save.path}")
+	 @Value("${image.save.path}")
 	private String imgSavePath;
 	
 	@Test

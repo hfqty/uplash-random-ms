@@ -1,7 +1,6 @@
 package me.ning.pro.book.dao;
 
-import me.ning.pro.dao.book.BookDao;
-import me.ning.pro.entity.book.Book;
+import me.ning.pro.book.entity.Book;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,11 +1,5 @@
 package me.ning.pro.util.img;
 
-import com.drew.imaging.jpeg.JpegMetadataReader;
-import com.drew.imaging.jpeg.JpegProcessingException;
-import com.drew.metadata.Directory;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.Tag;
-import me.ning.pro.entity.image.ImageExifInfo;
 import me.ning.pro.util.file.FileUtil;
 import me.ning.pro.util.http.RequestUtil;
 import org.slf4j.Logger;
@@ -14,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import java.io.*;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 
 public class ImageUtil {
 
@@ -62,6 +55,11 @@ public class ImageUtil {
 
     public static void toServer(String url) throws IOException {
         HttpURLConnection connection  = RequestUtil.connection(bigImgUrl(url));
+        toServer(url, connection);
+    }
+
+    private static void toServer(String url, HttpURLConnection connection) throws IOException {
+        String name = name(url);
         String fullPath = fullPath(url);
         // 输入流
         InputStream is = null;
@@ -73,19 +71,12 @@ public class ImageUtil {
           os = new FileOutputStream(FileUtil.createFile(fullPath));
             //总大小
             int contentLength = connection.getContentLength();
+            BigDecimal fileSize = BigDecimal.valueOf(contentLength);
+            showFileSize(fileSize);
 
             BigDecimal writed = BigDecimal.ZERO;
-            BigDecimal fileSize = BigDecimal.valueOf(contentLength);
             BigDecimal downloaded = BigDecimal.ZERO;
             BigDecimal count= BigDecimal.valueOf(0.1);
-            BigDecimal fileSizeKB = fileSize.divide(BigDecimal.valueOf(1024),3,BigDecimal.ROUND_HALF_UP);
-            if(fileSizeKB.compareTo(BigDecimal.valueOf(1024))>=0){
-                BigDecimal fileSizeMB  = fileSizeKB.divide(BigDecimal.valueOf(1024),3,BigDecimal.ROUND_HALF_UP);
-                logger.info("图片大小："+fileSizeMB+"MB");
-            }
-            else
-            logger.info("图片大小："+fileSizeKB+"KB");
-
             // 读取到的数据长度
             int len;
             // 输出的文件流
@@ -96,7 +87,7 @@ public class ImageUtil {
                 writed = writed.add(downloaded);
                 downloaded = writed.divide(fileSize,10,BigDecimal.ROUND_HALF_UP);
                 if(downloaded.compareTo(count)>=0){
-                    showDownloadPro(downloaded);
+                    showDownloadPro(name,downloaded);
                     count=  count.add(BigDecimal.valueOf(0.1));
 //                logger.info("下载进度："+downloaded+",("+writed+"/"+fileSize+")");
                 }
@@ -113,6 +104,15 @@ public class ImageUtil {
         }
     }
 
+    private static void showFileSize(BigDecimal fileSize) {
+        BigDecimal fileSizeKB = fileSize.divide(BigDecimal.valueOf(1024),3,BigDecimal.ROUND_HALF_UP);
+        if(fileSizeKB.compareTo(BigDecimal.valueOf(1024))>=0){
+            BigDecimal fileSizeMB  = fileSizeKB.divide(BigDecimal.valueOf(1024),3,BigDecimal.ROUND_HALF_UP);
+            logger.info("图片大小："+fileSizeMB+"MB");
+        }
+        else
+        logger.info("图片大小："+fileSizeKB+"KB");
+    }
 
 
     public static void deleteFromServer(File file) {
@@ -130,7 +130,7 @@ public class ImageUtil {
         ImageUtil imageUtil = new ImageUtil();
         String basePath = imageUtil.imageSavePath;
         if(basePath == null){
-            basePath  =  "C:\\dev\\UnsplashWallpaper\\";
+            basePath  =  "C:\\all\\iwallpaper\\";
             File file = new File(basePath);
             if(!file.exists()){
                 file.mkdir();
@@ -143,12 +143,11 @@ public class ImageUtil {
     }
 
     public static boolean checkAndDownload(String url){
-        logger.info("检查本地：并下载图片");
         String fullPath = ImageUtil.fullPath(url);
         try {
             if(FileUtil.checkExist(fullPath) == null ){
                 toServer(url);
-                logger.info("保存图片：保存到服务器成功");
+                logger.info("保存图片：已保存至"+fullPath);
             }
             return true;
         } catch (Exception e) {
@@ -158,8 +157,8 @@ public class ImageUtil {
     }
 
 
-    public static void showDownloadPro(BigDecimal downloaded){
-        System.out.print("进度：");
+    public static void showDownloadPro(String name,BigDecimal downloaded){
+        System.out.print(name+",下载进度：");
         showPro(downloaded);
     }
 

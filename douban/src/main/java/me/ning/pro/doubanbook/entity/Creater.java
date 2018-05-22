@@ -70,13 +70,11 @@ public class Creater {
     }
 
     public String toString() {
-        return "Creater{" +
-                "title='" + title + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", img='" + img + '\'' +
-                ", homepage='" + homepage + '\'' +
-                ", time='" + time + '\'' +
-                ", introduction='" + introduction + '\'' +
-                '}';
+        return "豆列信息\n" +
+                 title  +"\n"+
+                 nickname  +"\n"+
+                 homepage  +"\n"+
+                 time+"\n"+
+                 introduction  ;
     }
 }

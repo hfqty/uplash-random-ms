@@ -15,8 +15,8 @@ public class BookName {
     private static List<String> booknames = new ArrayList<>();
    public static void main(String []args) throws IOException {
        File bookLib = new File("C:\\Users\\Administrator\\Documents\\FreeN");
-       File booknameDotMD = new File("C:\\dev\\zeyu's-note\\to-read-all.md");
-       FileWriter booknameWriter = new FileWriter("C:\\dev\\zeyu's-note\\to-read-all.md");
+       File booknameDotMD = new File("C:\\all\\inote\\to-read-all.md");
+       FileWriter booknameWriter = new FileWriter("C:\\all\\inote\\to-read-all.md");
 
        BookName bookName = new BookName();
        bookName.fileNameToList(bookLib);
